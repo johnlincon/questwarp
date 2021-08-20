@@ -69,7 +69,7 @@
 function	script	Q_Teleportadora	{
 	mes "[Quest Warper]";
 	mes "Olá,";
-	mes "Eu posso te teletransportar pra qualquer Caverna/Masmora e também pra aquelas que é necessário uma quest, entretanto você deve visita-los primeiro.";
+	mes "Eu posso te teletransportar pra qualquer Caverna/Masmora e também pra aquelas que é necessário uma quest, entretanto você deve visita-las primeiro.";
 	mes "O que você deseja?";
 
 	if(getarg(0) == 0) callfunc "QWS_MMarray",0;
@@ -82,7 +82,7 @@ function	script	Q_Teleportadora	{
 	case 2:
 		warp $QW_SP_WarpMap$, $QW_SP_WarpX, $QW_SP_WarpY;
 		close2;
-		consolemes(CONSOLEMES_WARNING, "Please check your special warp menu settings on the Teleportadora.");
+		consolemes(CONSOLEMES_WARNING, "Por favor, verifique as configurações especiais do menu na Teleportadora.");
 		end;
 	case 3: goto L_town;
 	case 4: goto L_dungeon;
@@ -508,7 +508,7 @@ L_End:
 L_FewWarps:
 	next;
 	mes "[Quest Warper]";
-	mes "Você precisa desbloquear os locais para eles fiquem disponíveis a você.";
+	mes "Você precisa desbloquear os locais para que eles fiquem disponíveis a você.";
 	mes "Para desbloquear um local fale com os meus auxiliares dentro da masmorra/caverna.";
 	mes "Para mapas que é necessário uma quest você deve fazer elas primeiro e depois encontrar minha auxiliar no mapa.";
 	mes "Quer que eu verifique quais mapas estão disponíveis pra você?";
@@ -541,15 +541,15 @@ L_Short_on_zeny:
 stampcard:
 // Counting of the ammount of places you have unlocked
 	//next;
-	//mes "Let me check what Towns you have.";
+	//mes "Deixe-me verificar quais cidades você tem disponível.";
 	//callfunc "QWS_TownStamps";
-	//mes "You collected^00FF00 "+@Tstamp+" of "+@MaxTstamp+" ^000000Towns.";
-	//if (@Tstamp == 15) mes "They say there is an island you can only get to when married...";
+	//mes "Você habilitou ^00FF00 "+@Tstamp+" de "+@MaxTstamp+" ^000000Cidades.";
+	//if (@Tstamp == 15) mes "Dizem que existe uma ilha que você só pode ir quando está casado ...";
 	//if (@Tstamp == 15) emotion 18;
 	next;
-	mes "Vou verificar quantas masmorras você liberou.";
+	mes "Deixe-me verificar quais masmorras você tem disponível.";
 	callfunc "QWS_DungeonStamps";
-	mes "Você já registrou^00FF00 "+@Dstamp+" de "+@MaxDstamp+" ^000000Masmorras.";
+	mes "Você habilitou ^00FF00 "+@Dstamp+" de "+@MaxDstamp+" ^000000Masmorras.";
 	mes "Para desbloquear uma masmorra, procure minhas auxiliares dentro da masmorra.";
 	mes "Normalmente você pode encontra-los perto do meio ou no final delas.";
 	return;
@@ -570,7 +570,7 @@ function	script	QWS_TownStamps	{
 
 function	script	QWS_DungeonStamps	{
 	set @Dstamp,0;
-	set @MaxDstamp,29; //maximum number of dungeons
+	set @MaxDstamp,31; //maximum number of dungeons
 	set @binvalue,1;
 	set @Dstamploop,0;
 	do {
@@ -586,7 +586,7 @@ function	script	QWS_DungeonStamps	{
 function	script	QWS_MMarray	{
 
 	// Currently 9 items
-	setarray @pMmenuitems$[0], "GameMaster Menu", $QW_SP_Warpname$, "Cidades", "Cavernas", "Por que não tem warps?", "Why don't you unlock this location?", "Heal", "Heal", "Storage", "Guild Storage", "Cancelar";
+	setarray @pMmenuitems$[0], "GameMaster Menu", $QW_SP_Warpname$, "Cidades", "Cavernas", "Por que não tem warps?", "Por que você não desbloqueia este local?", "Cura Completa", "Cura Parcial", "Armazém", "Armazém do Clã", "Cancelar";
 	set @Mi,0; // loop counter
 	set @Mj,0; // menu line counter
 
@@ -1245,20 +1245,6 @@ function	script	QWS_Darray	{
 
 	QWS_Make_Dungeon_Menu 14;
 
-//----------------KIEL DUNGEON
-	setarray @pDmenuitems$[@Di], "Fábrica de Rôbos";
-	setarray @pDprice[@Di], $QW_AW_PRICE;
-	setarray @pDfee$[@Di], "$QW_AW_FEE";
-	setarray @DLevels[@Di], 2;
-
-	setarray @DGat$[@Dref], "kh_dun01", "kh_dun02";
-	setarray @DLevelName$[@Dref], "1st Floor", "2nd Floor";
-	setarray @DXcoords[@Dref], 63, 42;
-	setarray @DYcoords[@Dref], 10, 197;
-	setarray @DDepth[@Dref], 0, 1;
-
-	QWS_Make_Dungeon_Menu 28;
-
 //----------------LIGHTHALZEN BIO LAB
 	setarray @pDmenuitems$[@Di], "Laboratório de Somatologia";
 	setarray @pDprice[@Di], $QW_AW_PRICE;
@@ -1441,6 +1427,20 @@ function	script	QWS_Darray	{
 
 	QWS_Make_Dungeon_Menu 27;
 
+//----------------KIEL DUNGEON
+	setarray @pDmenuitems$[@Di], "Fábrica de Rôbos";
+	setarray @pDprice[@Di], $QW_AW_PRICE;
+	setarray @pDfee$[@Di], "$QW_AW_FEE";
+	setarray @DLevels[@Di], 2;
+
+	setarray @DGat$[@Dref], "kh_dun01", "kh_dun02";
+	setarray @DLevelName$[@Dref], "1st Floor", "2nd Floor";
+	setarray @DXcoords[@Dref], 63, 42;
+	setarray @DYcoords[@Dref], 10, 197;
+	setarray @DDepth[@Dref], 0, 1;
+
+	QWS_Make_Dungeon_Menu 28;
+
 //----------------BEACH DUNGEON (Ragnaberry)
 	setarray @pDmenuitems$[@Di], "Mao - Caverna Leste";
 	setarray @pDprice[@Di], $QW_OW_PRICE;
@@ -1470,18 +1470,18 @@ function	script	QWS_Darray	{
 	QWS_Make_Dungeon_Menu 30;
 	
 //----------------BEACH DUNGEON (Ragnaberry)
-//	setarray @pDmenuitems$[@Di], "Karu - a Caverna Oeste";
-//	setarray @pDprice[@Di], $QW_OW_PRICE;
-//	setarray @pDfee$[@Di], "$QW_OW_FEE";
-//	setarray @DLevels[@Di], 1;
-//
-//	setarray @DGat$[@Dref], "beach_dun";
-//	setarray @DLevelName$[@Dref], "Karu - a Caverna Oeste";
-//	setarray @DXcoords[@Dref], 266;
-//	setarray @DYcoords[@Dref], 67;
-//	setarray @DDepth[@Dref], 0;
-//
-//	QWS_Make_Dungeon_Menu 31;
+	setarray @pDmenuitems$[@Di], "Karu - a Caverna Oeste";
+	setarray @pDprice[@Di], $QW_OW_PRICE;
+	setarray @pDfee$[@Di], "$QW_OW_FEE";
+	setarray @DLevels[@Di], 1;
+
+	setarray @DGat$[@Dref], "beach_dun";
+	setarray @DLevelName$[@Dref], "Karu - a Caverna Oeste";
+	setarray @DXcoords[@Dref], 266;
+	setarray @DYcoords[@Dref], 67;
+	setarray @DDepth[@Dref], 0;
+
+	QWS_Make_Dungeon_Menu 31;
 
 //----------------Cancel
 	setarray @pDmenuitems$[@Di], "Cancelar";
@@ -1713,7 +1713,7 @@ anthell01,46,257,3	script	Registro de Caverna#2	4_M_ZONDAOYAJI,{ callfunc "QWS_D
 gefenia01,48,170,3	script	Registro de Caverna#9	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",9,"Gefenia"; close; }
 glast_01,371,308,3	script	Registro de Caverna#11	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",11,"Glast Heim"; close; }
 tur_dun01,148,53,3	script	Registro de Caverna#26	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",26,"Ilha da Tartaruga"; close; }
-//beach_dun,256,70,3	script	Registro de Caverna#31	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",31,"Karu, a Caverna Oeste"; close; }
+beach_dun,256,70,3	script	Registro de Caverna#31	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",31,"Karu, a Caverna Oeste"; close; }
 mjolnir_12,39,18,2	script	Registro de Caverna#13	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",13,"Labirinto da Floresta"; close; }
 ama_dun01,226,15,5	script	Registro de Caverna#1	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",1,"Labirinto de Tatames"; close; }
 ayo_dun02,258,193,5	script	Registro de Caverna#3	4_M_ZONDAOYAJI,{ callfunc "QWS_Dungeon_Teleportadora",3,"Labirinto do Santuário Ancestral"; close; }
